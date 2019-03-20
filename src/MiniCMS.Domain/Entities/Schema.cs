@@ -47,6 +47,12 @@ namespace MiniCMS.Domain.Entities
 
         public void AddField(FieldDefinition field)
         {
+            if (field == null)
+                throw new ArgumentNullException(nameof(field));
+            
+            if (string.IsNullOrWhiteSpace(field.Name))
+                throw new ArgumentException("Field name cannot be empty", nameof(field));
+            
             if (Fields.Any(f => f.Name == field.Name))
                 throw new InvalidOperationException($"Field '{field.Name}' already exists");
             
