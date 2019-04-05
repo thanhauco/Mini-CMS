@@ -59,6 +59,11 @@ namespace MiniCMS.Api.Controllers
             string schemaName, 
             [FromBody] CreateContentRequest request)
         {
+            if (request?.Data == null)
+            {
+                return BadRequest(new { message = "Content data is required" });
+            }
+
             var app = await _appRepository.GetByNameAsync(appName);
             if (app == null)
             {
