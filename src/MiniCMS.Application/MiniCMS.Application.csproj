@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>MiniCMS.Application</RootNamespace>
+    <AssemblyName>MiniCMS.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniCMS.Domain\MiniCMS.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
