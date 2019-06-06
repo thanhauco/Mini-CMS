@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28714.129
@@ -7,6 +7,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1B2C3D4-E5F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B2C3D4E5-F678-9012-BCDE-F12345678901}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCMS.Domain", "src\MiniCMS.Domain\MiniCMS.Domain.csproj", "{6737DECE-2081-4EAA-9862-B27282275A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCMS.Application", "src\MiniCMS.Application\MiniCMS.Application.csproj", "{E5A766FE-15F4-4EBC-95F0-D605D227E6ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCMS.Infrastructure", "src\MiniCMS.Infrastructure\MiniCMS.Infrastructure.csproj", "{348CE746-4402-49E5-AA9B-8C66EEEFB86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCMS.Api", "src\MiniCMS.Api\MiniCMS.Api.csproj", "{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniCMS.UnitTests", "tests\MiniCMS.UnitTests\MiniCMS.UnitTests.csproj", "{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +24,34 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6737DECE-2081-4EAA-9862-B27282275A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6737DECE-2081-4EAA-9862-B27282275A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6737DECE-2081-4EAA-9862-B27282275A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6737DECE-2081-4EAA-9862-B27282275A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A766FE-15F4-4EBC-95F0-D605D227E6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A766FE-15F4-4EBC-95F0-D605D227E6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A766FE-15F4-4EBC-95F0-D605D227E6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A766FE-15F4-4EBC-95F0-D605D227E6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{348CE746-4402-49E5-AA9B-8C66EEEFB86B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348CE746-4402-49E5-AA9B-8C66EEEFB86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348CE746-4402-49E5-AA9B-8C66EEEFB86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348CE746-4402-49E5-AA9B-8C66EEEFB86B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6737DECE-2081-4EAA-9862-B27282275A2E} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+		{E5A766FE-15F4-4EBC-95F0-D605D227E6ED} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+		{348CE746-4402-49E5-AA9B-8C66EEEFB86B} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+		{3DA299B9-1E04-4C48-85C3-A28B9FA82DDD} = {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+		{0A8AFF6E-77B1-4F56-84EA-F3D05FDED55F} = {B2C3D4E5-F678-9012-BCDE-F12345678901}
 	EndGlobalSection
 EndGlobal
