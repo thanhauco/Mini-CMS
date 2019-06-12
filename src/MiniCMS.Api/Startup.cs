@@ -31,6 +31,7 @@ namespace MiniCMS.Api
             // Repositories
             services.AddScoped<IRepository<App>, AppRepository>();
             services.AddScoped<AppRepository>();
+            services.AddScoped<SchemaRepository>();
             services.AddScoped<ContentRepository>();
 
             // Services
