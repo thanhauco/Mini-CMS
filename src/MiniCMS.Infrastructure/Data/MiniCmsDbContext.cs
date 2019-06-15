@@ -9,6 +9,7 @@ namespace MiniCMS.Infrastructure.Data
         public DbSet<Schema> Schemas { get; set; }
         public DbSet<Content> Contents { get; set; }
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<Webhook> Webhooks { get; set; }
 
         public MiniCmsDbContext(DbContextOptions<MiniCmsDbContext> options)
             : base(options)
