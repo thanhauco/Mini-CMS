@@ -33,6 +33,7 @@ namespace MiniCMS.Api
             services.AddScoped<AppRepository>();
             services.AddScoped<SchemaRepository>();
             services.AddScoped<ContentRepository>();
+            services.AddScoped<WebhookRepository>();
 
             // Services
             services.AddSingleton<IFileStorageService>(sp =>
