@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using MiniCMS.Domain.Entities;
 using MiniCMS.Infrastructure.Repositories;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.SignalR;
+using MiniCMS.Api.Hubs;
 
 namespace MiniCMS.Api.Controllers
 {
@@ -14,11 +16,16 @@ namespace MiniCMS.Api.Controllers
     {
         private readonly ContentRepository _contentRepository;
         private readonly AppRepository _appRepository;
+        private readonly IHubContext<ContentHub> _hubContext;
 
-        public ContentsController(ContentRepository contentRepository, AppRepository appRepository)
+        public ContentsController(
+            ContentRepository contentRepository, 
+            AppRepository appRepository,
+            IHubContext<ContentHub> hubContext)
         {
             _contentRepository = contentRepository;
             _appRepository = appRepository;
+            _hubContext = hubContext;
         }
 
         /// <summary>
