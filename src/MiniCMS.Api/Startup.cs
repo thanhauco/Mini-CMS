@@ -10,6 +10,7 @@ using MiniCMS.Infrastructure.Data;
 using MiniCMS.Infrastructure.Repositories;
 using MiniCMS.Infrastructure.Services;
 using MiniCMS.Domain.Entities;
+using MiniCMS.Api.Hubs;
 
 namespace MiniCMS.Api
 {
@@ -42,6 +43,8 @@ namespace MiniCMS.Api
             // Controllers
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddSignalR();
 
             // Swagger
             services.AddSwaggerGen(c =>
@@ -93,6 +96,7 @@ namespace MiniCMS.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ContentHub>("/hubs/content");
             });
         }
     }
