@@ -11,6 +11,9 @@ using MiniCMS.Infrastructure.Repositories;
 using MiniCMS.Infrastructure.Services;
 using MiniCMS.Domain.Entities;
 using MiniCMS.Api.Hubs;
+using MiniCMS.Api.GraphQL;
+using HotChocolate;
+using HotChocolate.AspNetCore;
 
 namespace MiniCMS.Api
 {
@@ -45,6 +48,11 @@ namespace MiniCMS.Api
                 .AddNewtonsoftJson();
 
             services.AddSignalR();
+
+            services.AddGraphQL(
+                SchemaBuilder.New()
+                    .AddQueryType<Query>()
+                    .Create());
 
             // Swagger
             services.AddSwaggerGen(c =>
@@ -97,6 +105,7 @@ namespace MiniCMS.Api
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ContentHub>("/hubs/content");
+                endpoints.MapGraphQL("/api/graphql");
             });
         }
     }
