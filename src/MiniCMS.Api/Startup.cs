@@ -14,6 +14,7 @@ using MiniCMS.Api.Hubs;
 using MiniCMS.Api.GraphQL;
 using HotChocolate;
 using HotChocolate.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MiniCMS.Api
 {
@@ -38,6 +39,7 @@ namespace MiniCMS.Api
             services.AddScoped<SchemaRepository>();
             services.AddScoped<ContentRepository>();
             services.AddScoped<WebhookRepository>();
+            services.AddScoped<AuditLogRepository>();
 
             // Services
             services.AddSingleton<IFileStorageService>(sp =>
@@ -46,6 +48,13 @@ namespace MiniCMS.Api
             // Controllers
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+            });
 
             services.AddSignalR();
 
