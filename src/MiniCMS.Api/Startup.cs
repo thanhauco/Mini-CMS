@@ -56,6 +56,9 @@ namespace MiniCMS.Api
                 options.DefaultApiVersion = new ApiVersion(1, 0);
             });
 
+            services.AddMemoryCache();
+            services.AddResponseCaching();
+
             services.AddSignalR();
 
             services.AddGraphQL(
@@ -107,6 +110,7 @@ namespace MiniCMS.Api
 
             app.UseRouting();
             app.UseCors();
+            app.UseResponseCaching();
             app.UseAuthentication();
             app.UseAuthorization();
 
