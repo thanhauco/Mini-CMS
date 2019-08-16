@@ -22,6 +22,7 @@ namespace MiniCMS.Api.Controllers
         /// Get all apps
         /// </summary>
         [HttpGet]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public async Task<ActionResult<IEnumerable<App>>> GetApps()
         {
             var apps = await _appRepository.GetAllAsync();
