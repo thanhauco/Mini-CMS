@@ -12,6 +12,7 @@ using MiniCMS.Infrastructure.Services;
 using MiniCMS.Domain.Entities;
 using MiniCMS.Api.Hubs;
 using MiniCMS.Api.GraphQL;
+using MiniCMS.Application.Services;
 using HotChocolate;
 using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,7 @@ namespace MiniCMS.Api
             services.AddScoped<AuditLogRepository>();
 
             // Services
+            services.AddScoped<IContentValidator, ContentValidator>();
             services.AddSingleton<IFileStorageService>(sp =>
                 new LocalFileStorageService(Configuration["Storage:Path"] ?? "./uploads"));
 

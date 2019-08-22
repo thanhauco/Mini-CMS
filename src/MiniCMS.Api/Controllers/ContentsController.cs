@@ -7,6 +7,7 @@ using MiniCMS.Infrastructure.Repositories;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.SignalR;
 using MiniCMS.Api.Hubs;
+using MiniCMS.Application.Services;
 
 namespace MiniCMS.Api.Controllers
 {
@@ -16,16 +17,22 @@ namespace MiniCMS.Api.Controllers
     {
         private readonly ContentRepository _contentRepository;
         private readonly AppRepository _appRepository;
+        private readonly SchemaRepository _schemaRepository;
         private readonly IHubContext<ContentHub> _hubContext;
+        private readonly IContentValidator _contentValidator;
 
         public ContentsController(
             ContentRepository contentRepository, 
             AppRepository appRepository,
-            IHubContext<ContentHub> hubContext)
+            SchemaRepository schemaRepository,
+            IHubContext<ContentHub> hubContext,
+            IContentValidator contentValidator)
         {
             _contentRepository = contentRepository;
             _appRepository = appRepository;
+            _schemaRepository = schemaRepository;
             _hubContext = hubContext;
+            _contentValidator = contentValidator;
         }
 
         /// <summary>
@@ -77,8 +84,19 @@ namespace MiniCMS.Api.Controllers
                 return NotFound(new { message = $"App '{appName}' not found" });
             }
 
+            var schema = await _schemaRepository.GetByNameAsync(app.Id, schemaName);
+            if (schema == null)
+            {
+                return NotFound(new { message = $"Schema '{schemaName}' not found" });
+            }
+
+            if (!_contentValidator.Validate(schema, request.Data, out var errors))
+            {
+                return BadRequest(new { message = "Validation failed", errors });
+            }
+
             // In full implementation, we would validate against schema
-            var content = new Content(app.Id, Guid.NewGuid(), request.Data.ToString());
+            var content = new Content(app.Id, schema.Id, request.Data.ToString());
             await _contentRepository.AddAsync(content);
 
             return CreatedAtAction(nameof(GetContent), 
