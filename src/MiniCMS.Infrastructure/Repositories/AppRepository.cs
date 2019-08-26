@@ -21,7 +21,7 @@ namespace MiniCMS.Infrastructure.Repositories
             return await _context.Apps
                 .Include(a => a.Contributors)
                 .Include(a => a.ApiKeys)
-                .FirstOrDefaultAsync(a => a.Id == id);
+                .FirstOrDefaultAsync(a => a.Id == id && !a.IsDeleted);
         }
 
         public async Task<App> GetByNameAsync(string name)
@@ -29,13 +29,14 @@ namespace MiniCMS.Infrastructure.Repositories
             return await _context.Apps
                 .Include(a => a.Contributors)
                 .Include(a => a.ApiKeys)
-                .FirstOrDefaultAsync(a => a.Name == name);
+                .FirstOrDefaultAsync(a => a.Name == name && !a.IsDeleted);
         }
 
         public async Task<IEnumerable<App>> GetAllAsync()
         {
             return await _context.Apps
                 .Include(a => a.Contributors)
+                .Where(a => !a.IsDeleted)
                 .ToListAsync();
         }
 
@@ -57,7 +58,9 @@ namespace MiniCMS.Infrastructure.Repositories
             var app = await _context.Apps.FindAsync(id);
             if (app != null)
             {
-                _context.Apps.Remove(app);
+                app.IsDeleted = true;
+                app.DeletedAt = DateTime.UtcNow;
+                _context.Apps.Update(app);
                 await _context.SaveChangesAsync();
             }
         }

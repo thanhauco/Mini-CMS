@@ -17,6 +17,10 @@ namespace MiniCMS.Domain.Common
         
         public string ModifiedBy { get; set; }
 
+        public bool IsDeleted { get; set; }
+        
+        public DateTime? DeletedAt { get; set; }
+
         protected BaseEntity()
         {
             Id = Guid.NewGuid();

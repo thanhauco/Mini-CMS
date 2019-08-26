@@ -19,18 +19,21 @@ namespace MiniCMS.Infrastructure.Repositories
 
         public async Task<Content> GetByIdAsync(Guid id)
         {
-            return await _context.Contents.FindAsync(id);
+            return await _context.Contents
+                .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
         }
 
         public async Task<IEnumerable<Content>> GetAllAsync()
         {
-            return await _context.Contents.ToListAsync();
+            return await _context.Contents
+                .Where(c => !c.IsDeleted)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Content>> GetByAppAndSchemaAsync(Guid appId, Guid schemaId)
         {
             return await _context.Contents
-                .Where(c => c.AppId == appId && c.SchemaId == schemaId)
+                .Where(c => c.AppId == appId && c.SchemaId == schemaId && !c.IsDeleted)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToListAsync();
         }
@@ -40,7 +43,8 @@ namespace MiniCMS.Infrastructure.Repositories
             return await _context.Contents
                 .Where(c => c.AppId == appId && 
                             c.SchemaId == schemaId && 
-                            c.Status == ContentStatus.Published)
+                            c.Status == ContentStatus.Published &&
+                            !c.IsDeleted)
                 .OrderByDescending(c => c.PublishedAt)
                 .ToListAsync();
         }
@@ -63,7 +67,9 @@ namespace MiniCMS.Infrastructure.Repositories
             var content = await _context.Contents.FindAsync(id);
             if (content != null)
             {
-                _context.Contents.Remove(content);
+                content.IsDeleted = true;
+                content.DeletedAt = DateTime.UtcNow;
+                _context.Contents.Update(content);
                 await _context.SaveChangesAsync();
             }
         }
