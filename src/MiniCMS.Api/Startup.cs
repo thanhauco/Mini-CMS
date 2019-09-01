@@ -16,6 +16,7 @@ using MiniCMS.Application.Services;
 using HotChocolate;
 using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using AspNetCoreRateLimit;
 
 namespace MiniCMS.Api
 {
@@ -60,6 +61,13 @@ namespace MiniCMS.Api
 
             services.AddMemoryCache();
             services.AddResponseCaching();
+
+            // Rate Limiting
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddHttpContextAccessor();
 
             services.AddSignalR();
 
@@ -113,6 +121,7 @@ namespace MiniCMS.Api
             app.UseRouting();
             app.UseCors();
             app.UseResponseCaching();
+            app.UseIpRateLimiting();
             app.UseAuthentication();
             app.UseAuthorization();
 
